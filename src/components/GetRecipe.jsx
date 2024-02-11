@@ -1,16 +1,12 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { OverlayTrigger } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import { Tooltip } from "react-bootstrap";
 import ShowRecipeDetails from "./ShowRecipeDetails";
 
-const NUM_RESULTS = 10;
 const API_KEY = "apiKey=c1c7bd93d67a4ac98fd6346c6a3ce1d2";
 const API_ENDPOINT = "https://api.spoonacular.com/";
-const AUTOCOMPLETE_URI = API_ENDPOINT + "food/ingredients/autocomplete?number="+ NUM_RESULTS + "&" + API_KEY;
 const RECIPE_URI = API_ENDPOINT + "recipes/";
-const SEARCH_URI = API_ENDPOINT + "recipes/complexSearch?" + API_KEY;
 
 
 function apiReqCard(id) 
@@ -98,9 +94,9 @@ class GetRecipe extends React.Component
       .then( res => res.json())
       .then(
         (result) => {
+          this.props.setSelectedID(id);
           this.setState({
             instructions: result,
-            recipeId: id
           });
         },
         (error) => {
@@ -114,7 +110,7 @@ class GetRecipe extends React.Component
   
   //Final api requestion in series, as other uses relevant function to generate string
   //Then performs the api request but noe sets isLoading to false
-  apiRecipeIngredients( index, event )
+  apiRecipeIngredients( index )
   {
     var id = this.props.recipes[index].id;
     var apiStr = apiReqIngredients( id );
@@ -143,7 +139,7 @@ class GetRecipe extends React.Component
     //This is then sent as props to display the recipe in the next component
     render()
     {
-      if( this.props.recipes.length === 0 )
+      if( this.props.recipes && this.props.recipes.length === 0 )
       {
         return( 
                   <div className="flexbabybig"><h4>{this.props.joke}</h4></div>
@@ -158,9 +154,9 @@ class GetRecipe extends React.Component
             {/*Display the recipe results as a ListGroup */}
             
                   <ListGroup>
-                {
-                  this.props.recipes.map(( recipe, index ) => (
-                    <div className="listitem">
+                { this.props.recipes && 
+                   this.props.recipes.map(( recipe, index ) => (
+                    <div className="listitem" key="recipeList">
                     <ListGroup.Item eventKey={index}
                       action onClick={ event => this.setRecipeCard(index, event) }
                       disabled={this.state.isLoading}
@@ -185,8 +181,8 @@ class GetRecipe extends React.Component
             {/*Change this to take in just the selected recipe id, then extract
             details in the ShowRecipeDetails component */
                 this.state.error === null && this.state.instructions !== null && this.state.ingredients !== null && 
-                  <ShowRecipeDetails 
-                    id={this.state.recipeId}
+                  <ShowRecipeDetails
+                    id={this.props.selectedID}
                   />
             }
             </div>

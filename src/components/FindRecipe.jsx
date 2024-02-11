@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, ButtonGroup, Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { AsyncTypeahead, Typeahead } from 'react-bootstrap-typeahead';
 import ErrorBoundary from './ErrorBoundary';
-import GetRecipe from './GetRecipe';
 
 
 const NUM_RESULTS = 10;
@@ -77,7 +76,7 @@ class FindRecipe extends React.Component
       searchRes: [],
       searchAllergen: [],
       ingredientList: [],
-      recipes: [],
+      //recipes: [],
       
       //Search filter selections
       diet: null,
@@ -175,9 +174,10 @@ class FindRecipe extends React.Component
       .then( res=> res.json())
       .then(
         (result) => {
+          this.props.setRecipes(result.results);
           this.setState({
             isLoading: false,
-            recipes: result.results
+            //can change to a global loading variable
           });
         },
         (error) => {
@@ -398,15 +398,6 @@ class FindRecipe extends React.Component
                 </div>
               
               </div>
-              {/*Loads next component that displays the search results and able to load more detail from api
-                 Send props of the recipe results from the search and the joke loaded to fill the text space*/}
-              <ErrorBoundary>
-              <GetRecipe 
-                recipes={this.state.recipes}
-                joke={this.state.joke}
-                
-              />
-              </ErrorBoundary>     
         </div>
         
             );

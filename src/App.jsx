@@ -1,36 +1,23 @@
 //Standard React Components
 import FindRecipe from "./components/FindRecipe";
-
-//Data source imports
-//import filters from "../data/filters.json";
+import GetRecipe from "./components/GetRecipe";
+import ShowRecipeDetails from "./components/ShowRecipeDetails";
+import React, { useState } from 'react';
 
 //Style sheet import
-//import LocalStyle from "../styles/styles.css";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+//import './recipe.css';
 
 
-
-/*Constants*/
-//------------------------------------------------------------------------------------------------------------//
-//Number of recipe results to show in search
-
-
-//------------------------------------------------------------------------------------------------------------//
-/*Functions to create URL API request strings*/
-
-/* Functions to generate strings that search the api
-  Often usede in combination to generate a long string for one request*/
-
-/* Get requests for the API*/
-
-
-
-//------------------------------------------------------------------------------------------------------------//
 
 
 //Main page to wrap and export all components
 export default function RecipeSearchForm() 
 {
+  const [recipes, setRecipes] = useState(/* Your recipe list */);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(/* Default selected recipe ID */);
+
+
   return (
     <div>
     <head>
@@ -48,7 +35,9 @@ export default function RecipeSearchForm()
         Then can easily structure framework at this point.
         send to FindRecipe the recipes list for it to set.
         Only other variable needed is the selected recipe, either id or index */}
-        <FindRecipe />
+        <FindRecipe recipes={recipes} setRecipes={setRecipes} />
+        <GetRecipe recipes={recipes} selectedID={selectedRecipeId} setSelectedID={setSelectedRecipeId} />
+        
       </div>
     </body>
     </div>
