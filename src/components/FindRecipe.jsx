@@ -327,7 +327,7 @@ class FindRecipe extends React.Component
             {/* Search options for the known recipe types*/}
                   <Typeahead
                   id="type"
-                  placeholder="Type Options"
+                  placeholder="Bad Change"
                   clearButton="true"
                   dropup="true"
                   options={filters.type}
