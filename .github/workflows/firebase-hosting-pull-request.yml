@@ -14,6 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
+      - name: Verify VITE_SPOONACULAR_API_KEY presence
+        env:
+          VITE_SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }}
+        run: echo "VITE_SPOONACULAR_API_KEY is: $VITE_SPOONACULAR_API_KEY"
       - name: Build project with VITE environment variable
         run: npm run build # Make sure you have a 'build' script in your package.json, e.g., "build": "vite build"
         env:
