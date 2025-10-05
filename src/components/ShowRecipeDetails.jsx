@@ -3,7 +3,7 @@ import { Accordion } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 //import Button from "react-bootstrap";
 
-const API_KEY = "apiKey=c1c7bd93d67a4ac98fd6346c6a3ce1d2";
+const API_KEY = `apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`;
 const API_ENDPOINT = "https://api.spoonacular.com/";
 const RECIPE_URI = API_ENDPOINT + "recipes/";
 
