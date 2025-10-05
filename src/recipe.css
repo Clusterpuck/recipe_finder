@@ -254,12 +254,31 @@
       height: 50px;
       width: 50vw;
     }
+
+    .content-container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh; /* Full viewport height */
+    }
+
+    .side-menu {
+      width: 25%; /* Adjust this value for desired width */
+      max-width: 300px;
+      background-color: #e6e8ef; /* Your secondary color */
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content {
+      flex-grow: 1; /* Takes up the remaining space */
+      background-color: #819BC5; /* Your background color */
+      padding: 20px;
+    }
     
-    
+/*     
     .flexmummy {
       display: flex;
       background-color: var(--color-bg); 
-      /*height: 88vh;*/
       width: 100vw;
       flex-direction: row;
       justify-content: center;
@@ -283,7 +302,7 @@
       width: 40%;
       overflow-y: auto;
       background-color: var(--color-bg); 
-    }
+    } */
     
     @media (max-width: 500px)
     {

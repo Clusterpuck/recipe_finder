@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ListGroup } from "react-bootstrap";
 import { OverlayTrigger } from "react-bootstrap";
 import { Tooltip } from "react-bootstrap";
@@ -139,6 +140,7 @@ class GetRecipe extends React.Component
     //This is then sent as props to display the recipe in the next component
     render()
     {
+      console.log('GetRecipe props:', this.props);
       if( this.props.recipes && this.props.recipes.length === 0 )
       {
         return( 
@@ -149,14 +151,13 @@ class GetRecipe extends React.Component
       {
         return(
           <>
-          <div className="flexbabysmall">
             
             {/*Display the recipe results as a ListGroup */}
             
                   <ListGroup>
-                { this.props.recipes && 
+                { this.props.recipes &&
                    this.props.recipes.map(( recipe, index ) => (
-                    <div className="listitem" key="recipeList">
+                    <div className="listitem" key={recipe.id}>
                     <ListGroup.Item eventKey={index}
                       action onClick={ event => this.setRecipeCard(index, event) }
                       disabled={this.state.isLoading}
@@ -174,7 +175,6 @@ class GetRecipe extends React.Component
                 }
                   </ListGroup>  
             
-            </div>   
             <div className="flexbabybig">
             
               
@@ -198,5 +198,12 @@ class GetRecipe extends React.Component
   
     
 }
+
+GetRecipe.propTypes = {
+  recipes: PropTypes.array,
+  selectedID: PropTypes.number,
+  setSelectedID: PropTypes.func.isRequired,
+  joke: PropTypes.string
+};
 
 export default GetRecipe;
