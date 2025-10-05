@@ -285,7 +285,7 @@ class FindRecipe extends React.Component
         /*Ternary operator second option for key word search*/  
               <InputGroup>
                 <Form.Control
-                  placeholder="Type Here"
+                  placeholder="Enter Keyword"
                   ref="input"
                   value={this.state.query}
                   clearButton="true"
